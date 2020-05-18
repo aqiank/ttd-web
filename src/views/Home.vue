@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-tabs v-model="activeTab" @tab-click="handleClick">
+      <el-tab-pane label="Location" name="location"><Location /></el-tab-pane>
+      <el-tab-pane label="Event" name="event"><Event /></el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Location from '@/components/Location.vue'
+import Event from '@/components/Event.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Location,
+    Event,
+  },
+  data() {
+    return {
+      activeTab: 'location'
+    };
+  },
+  created() {
+    this.$store.commit('refreshItems')
+  },
+  methods: {
+    handleClick(/*tab, event*/) {
+    }
   }
 }
 </script>
